@@ -46,6 +46,15 @@ class GitCommand {
                 }
             }
         }
+        else if(path_file === '*'){
+            for (const path in modified_files) {
+                if (modified_files.hasOwnProperty(path) && path[0] !== '.') {
+                    const file = modified_files[path];
+                    this.staging.push(file);
+                    delete modified_files[path];
+                }
+            }
+        }
         else{
             return `Failed to add ${path_file}! File is not modified or missing.`;
         }
